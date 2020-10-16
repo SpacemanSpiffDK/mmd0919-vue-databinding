@@ -1,41 +1,47 @@
 <template>
   <div id="app">
     <header>
-        <nav id="navigation">
-            <ul>
-              <li v-for="(page, index) in ContentData.pages" :key="index" :class="{'active': page.id == CurrentPageId}">
-                  <a href="#" v-on:click="CurrentPageId = index">{{ page.metaData.name }}</a>
-              </li>
-            </ul>
-        </nav>
+      <nav id="navigation">
+        <ul>
+          <li v-for="(page, index) in ContentData.pages" :key="index" :class="{'active': index == CurrentPageIndex}">
+            <a href="#" v-on:click="CurrentPageIndex = index">{{ page.metaData.name }}</a>
+          </li>
+        </ul>
+      </nav>
     </header>
     <main>
       <article>
-        <h1 v-text="currentPage(CurrentPageId).content.header"></h1>
-        <img class="page-image" /// INSÆT BILLEDE HER!!!!!"!!!!!  LIÆDASKLKJFGASGKUAFSKLGASFKGJRAWHKJ":alt="currentPage(CurrentPageId).content.header">
-        <div class="text">{{ currentPage(CurrentPageId).content.image }}</div>
+        <h1 v-text="currentPage(CurrentPageIndex).content.header"></h1>
+        <div v-if="currentPage(CurrentPageIndex).metaData.template == 'page' || currentPage(CurrentPageIndex).metaData.template == 'news'">
+          <img class="page-image" :src="currentPage(CurrentPageIndex).content.image" :alt="currentPage(CurrentPageIndex).content.header">
+          <div class="text" v-html="currentPage(CurrentPageIndex).content.text"></div>
+          <NewsList v-if="currentPage(CurrentPageIndex).metaData.template == 'news'" :newsItems="ContentData.news" />
+        </div>
+        <WeatherTemplate v-if="currentPage(CurrentPageIndex).metaData.template == 'weather'" />
       </article>
     </main>
-    <TemplateFooter :footerObj="ContentData.site.footer" />
+    <FooterTemplate :footerData="ContentData.site.footer" />
   </div>
 </template>
 
 <script>
-import TemplateFooter from './TemplateFooter.vue';
 import ContentData from '../data/content-data';
+import FooterTemplate from './FooterTemplate.vue';
+import NewsList from './NewsList.vue';
+import WeatherTemplate from './WeatherTemplate.vue';
 
 export default {
   name: 'MasterTemplate',
-  components: { TemplateFooter },
+  components: { FooterTemplate, WeatherTemplate, NewsList },
   data() { 
     return {
       ContentData,
-      CurrentPageId: 0,
+      CurrentPageIndex: 0,
     };
   },
   methods: {
-    currentPage(CurrentPageId) {
-      return ContentData.pages[CurrentPageId];
+    currentPage(CurrentPageIndex) {
+      return ContentData.pages[CurrentPageIndex];
     },
   },
 }
