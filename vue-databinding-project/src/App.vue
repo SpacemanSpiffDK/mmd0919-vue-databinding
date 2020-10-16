@@ -5,11 +5,16 @@
 </template>
 
 <script>
-import MasterTemplate from './components/MasterTemplate.vue'
+import MasterTemplate from './components/MasterTemplate.vue';
 
 export default {
   name: 'App',
-  components: { MasterTemplate }
+  components: { MasterTemplate },
+   data () {
+    return {
+      info: null
+    }
+  },
 }
 </script>
 
