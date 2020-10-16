@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       info: 'test'
-    }
+    };
   },
 }
 </script>
