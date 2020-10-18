@@ -12,6 +12,7 @@
     <main>
       <article>
         <h1 v-text="currentPage(CurrentPageIndex).content.header"></h1>
+				<input type="text" v-model="currentPage(CurrentPageIndex).content.header">
         <div v-if="currentPage(CurrentPageIndex).metaData.template == 'page' || currentPage(CurrentPageIndex).metaData.template == 'news'">
           <img class="page-image" :src="currentPage(CurrentPageIndex).content.image" :alt="currentPage(CurrentPageIndex).content.header">
           <div class="text" v-html="currentPage(CurrentPageIndex).content.text"></div>
