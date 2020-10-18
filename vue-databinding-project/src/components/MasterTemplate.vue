@@ -12,13 +12,13 @@
     <main>
       <article>
         <h1 v-text="currentPage(CurrentPageIndex).content.header"></h1>
-				<input type="text" v-model="currentPage(CurrentPageIndex).content.header">
+				<!-- <input type="text" v-model="currentPage(CurrentPageIndex).content.header"> -->
         <div v-if="currentPage(CurrentPageIndex).metaData.template == 'page' || currentPage(CurrentPageIndex).metaData.template == 'news'">
           <img class="page-image" :src="currentPage(CurrentPageIndex).content.image" :alt="currentPage(CurrentPageIndex).content.header">
           <div class="text" v-html="currentPage(CurrentPageIndex).content.text"></div>
           <NewsList v-if="currentPage(CurrentPageIndex).metaData.template == 'news'" :newsItems="ContentData.news" />
         </div>
-        <WeatherTemplate v-if="currentPage(CurrentPageIndex).metaData.template == 'weather'" />
+        <PhotosTemplate v-if="currentPage(CurrentPageIndex).metaData.template == 'photos'" />
       </article>
     </main>
     <FooterTemplate :footerData="ContentData.site.footer" />
@@ -29,11 +29,11 @@
 import ContentData from '../data/content-data';
 import FooterTemplate from './FooterTemplate.vue';
 import NewsList from './NewsList.vue';
-import WeatherTemplate from './WeatherTemplate.vue';
+import PhotosTemplate from './PhotosTemplate.vue';
 
 export default {
   name: 'MasterTemplate',
-  components: { FooterTemplate, WeatherTemplate, NewsList },
+  components: { FooterTemplate, PhotosTemplate, NewsList },
   data() { 
     return {
       ContentData,

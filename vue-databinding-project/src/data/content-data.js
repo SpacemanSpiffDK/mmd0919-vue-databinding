@@ -60,11 +60,11 @@ const data = {
         {
             "metaData":
             {
-                "name": "Weather",
-                "template": "weather",
+                "name": "Photos",
+                "template": "photos",
             },
             "content": {
-                "header": "Weather forecast",
+                "header": "Photos",
             }
         }
     ],
